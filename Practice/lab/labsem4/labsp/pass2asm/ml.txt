@@ -1,0 +1,5 @@
+100 mov eax a
+104 add ebx b
+107 int 0x80
+109 sub edx a
+112 mov [res] c

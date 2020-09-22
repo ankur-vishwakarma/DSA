@@ -1,0 +1,9 @@
+mov eax,a;
+add ebx,b;
+int ecx,f;
+sub eax,ebx;
+section.data:
+a equ 2;
+b equ 3;
+section.bss:
+res resb 2

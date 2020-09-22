@@ -1,0 +1,46 @@
+INTRODUCTION:
+ 
+Almost all programs have some machine dependencies (that is, they run somewhat differently on different types of computers), but the degree of independence can vary widely. Machine-independent programs give you more flexibility: if you buy a new type of computer, you can continue using the same software package instead of learning a new one. On the other hand, machine-dependent programs often take advantage of special hardware features of a particular computer, making the programs faster.
+
+
+******MACHINE DEPENDENT LOADER******
+Refers to a software application that runs only on a particular type of computer.
+
+Another term for machine dependent is device dependent, but whereas machine dependent usually refers to the computer, device dependent can refer to a dependency on any device, like a printer.
+
+ FEATURES:
+1. Relocation - the need of relocation is a consequence of change to larger and more powerful computers as they perform   various tasks simultaneously hence one or other task need to be relocated. 
+
+2. Program Linking - To link control sections together is reffered as program linking. We know that their may be various subroutines in a program and it is not necessary they always get simulataneous memory , hence they need to be connected or linked , thus utilising the mechanism of subroutine linkage we link these modules and this is called program 
+linking.
+
+ADVANTAGES:
+1. Machine dependent loaders are absolute loaders hence they are simple and efficient.
+
+DISADVANTAGES:
+1. Programmer has to specify the starting address.
+2. Cannot run several programs.
+3. Difficult to use subroutine libraries efficiently.
+
+
+******MACHINE INDEPENDENT LOADER******
+
+Programs that run on a variety of different types of computers are called machine independent.Independency in terms of machine refers that a program that is designed for one machine irrespective of hardware and software can run on other machine. The advantage of this is we dont need to program several versions of same program.
+Loading and linking are often thought of as operatig system service functions but machine independent loader resolves the issue.
+
+FEATURES:
+1. Automatic Library Search-Allows programmers to use standard subroutines without explicitly including them in the program to be loaded. The routines are automatically retrieved from a library as they are needed during linking. ALthough linking loaders that support automatic library search must keep track of external symbols that are reffered to, but not defined in the primary input to the loader.
+
+2. Loader options-Many loaders have a special command language that is used to specify options:
+i) a separate input file to the loader that contain control statements.
+ii) control statements embedded in the primary input stream between object programs.
+iii) control statements are included in the source program, and the assembler or compiler retains these commands as part of the object program.
+
+LOADER DESIGN OPTIONS:
+1. Linkage editors
+2. Dynamic Linking
+3. Bootstrap Loaders
+
+
+
+

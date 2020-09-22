@@ -1,0 +1,14 @@
+section .text
+global _start
+_start:
+mov eax,a
+add ebx,b
+int 0x80
+sub edx,d
+mov [res],d
+section .data
+a equ 2
+b equ 42
+section .bss
+res resw 12
+resk resd 2

@@ -1,0 +1,30 @@
+#include<stdio.h>
+main()
+{
+	int m[101],n,sum=0,i,j,sumi=0,sumj=0,coin=0;
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&m[i]);
+		sum=sum+m[i];
+	}
+	for(i=0;i<n;i++)
+	{
+		for(j=i+1;j<n;j++)
+		{
+			if(m[i]>m[j])
+			{
+				int temp=m[i];
+				m[i]=m[j];
+				m[j]=temp;
+			}
+		}
+	}
+	for(i=n-1;sumi<=sumj;i--)
+	{
+		coin++;
+		sumi=sumi+m[i];
+		sumj=sum-sumi;
+	}
+	printf("%d",coin);
+}

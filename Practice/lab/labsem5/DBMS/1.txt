@@ -1,0 +1,342 @@
+mysql> create database DBMSLAB;
+Query OK, 1 row affected (0.09 sec)
+
+mysql> create table dept(deptno int, deptname varchar(20), deptstr int, PRIMARY KEY deptno);
+ERROR 1046 (3D000): No database selected
+mysql> use DBMSLAB;
+Database changed
+mysql> create table dept(deptno int, deptname varchar(20), deptstr int, PRIMARY KEY deptno);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> create table dept(deptno int, deptname varchar(20), deptstr int, PRIMARY KEY (deptno));
+Query OK, 0 rows affected (0.28 sec)
+
+mysql> create table employee(eid int, dno int , foreign key (dno) references dept{deptno) on DELETE SET NULL ON UPDATE CASCADE);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '{deptno) on DELETE SET NULL ON UPDATE CASCADE)' at line 1
+mysql> create table employee(eid int, dno int , foreign key (dno) references dept(deptno) on DELETE SET NULL ON UPDATE CASCADE);
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> desc dpt;
+ERROR 1146 (42S02): Table 'dbmslab.dpt' doesn't exist
+mysql> desc dept;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| deptno   | int(11)     | NO   | PRI | 0       |       |
+| deptname | varchar(20) | YES  |     | NULL    |       |
+| deptstr  | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.04 sec)
+
+mysql> desc employee;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| eid   | int(11) | YES  |     | NULL    |       |
+| dno   | int(11) | YES  | MUL | NULL    |       |
++-------+---------+------+-----+---------+-------+
+2 rows in set (0.09 sec)
+
+mysql> insert into dept values(1,'CSE',29);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into dept values(2,'ECE',15);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into dept values(3,'EEE',19);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into employee values(1,10);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`dbmslab`.`employee`, CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`dno`) REFERENCES `dept` (`deptno`) ON DELETE SET NULL ON UPDATE CASCADE)
+mysql> insert into employee values(1,1);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into employee values(2,1);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> create table testnull(eid int NOT NULL, ename varchar(20), esal number(6,3),edob Date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'number(6,3),edob Date)' at line 1
+mysql> create table testnull(eid int NOT NULL, ename varchar(20), esal int(6,3),edob Date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '3),edob Date)' at line 1
+mysql> create table testnull(eid int NOT NULL, ename varchar(20), esal integer(6,3),edob Date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '3),edob Date)' at line 1
+mysql> create table testnull(eid int NOT NULL, ename varchar(20), esal float(6,3),edob Date);
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> insert into testnull(ename,esal,edob) values('Ankur',1112.12,12/7/2019);
+ERROR 1364 (HY000): Field 'eid' doesn't have a default value
+mysql> delete from 'dept' where 'deptno=1';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''dept' where 'deptno=1'' at line 1
+mysql> delete from 'dept' where deptno=1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''dept' where deptno=1' at line 1
+mysql> delete from 'dept' where 'deptno' =1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''dept' where 'deptno' =1' at line 1
+mysql> delete from 'dept' where 'deptno' = 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''dept' where 'deptno' = 1' at line 1
+mysql> delete from 'dept' WHERE 'deptno' = 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''dept' WHERE 'deptno' = 1' at line 1
+mysql> delete from dept WHERE 'deptno' = 1;
+Query OK, 0 rows affected, 1 warning (0.17 sec)
+
+mysql>
+mysql> select * from employee
+    -> ;
++------+------+
+| eid  | dno  |
++------+------+
+|    1 |    1 |
+|    2 |    1 |
++------+------+
+2 rows in set (0.05 sec)
+
+mysql> select * from dept;
++--------+----------+---------+
+| deptno | deptname | deptstr |
++--------+----------+---------+
+|      1 | CSE      |      29 |
+|      2 | ECE      |      15 |
+|      3 | EEE      |      19 |
++--------+----------+---------+
+3 rows in set (0.00 sec)
+
+mysql> delete from dept WHERE deptno = 1;
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from dept;
++--------+----------+---------+
+| deptno | deptname | deptstr |
++--------+----------+---------+
+|      2 | ECE      |      15 |
+|      3 | EEE      |      19 |
++--------+----------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee;
++------+------+
+| eid  | dno  |
++------+------+
+|    1 | NULL |
+|    2 | NULL |
++------+------+
+2 rows in set (0.00 sec)
+
+mysql> create table employee1(eid int, dno int , foreign key (dno) references dept{deptno) on DELETE CASCADE ON UPDATE CASCADE);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '{deptno) on DELETE CASCADE ON UPDATE CASCADE)' at line 1
+mysql> create table employee1(eid int, dno int , foreign key (dno) references dept(deptno) on DELETE CASCADE ON UPDATE CASCADE);
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> insert into employee values(1,10);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`dbmslab`.`employee`, CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`dno`) REFERENCES `dept` (`deptno`) ON DELETE SET NULL ON UPDATE CASCADE)
+mysql> insert into employee values(2,10);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`dbmslab`.`employee`, CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`dno`) REFERENCES `dept` (`deptno`) ON DELETE SET NULL ON UPDATE CASCADE)
+mysql> insert into employee1 values(2,10);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`dbmslab`.`employee1`, CONSTRAINT `employee1_ibfk_1` FOREIGN KEY (`dno`) REFERENCES `dept` (`deptno`) ON DELETE CASCADE ON UPDATE CASCADE)
+mysql> insert into dept values(3,'EEE',19);
+ERROR 1062 (23000): Duplicate entry '3' for key 'PRIMARY'
+mysql> insert into dept values(2,'ECE',15);
+ERROR 1062 (23000): Duplicate entry '2' for key 'PRIMARY'
+mysql> insert into employee values(2,10);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`dbmslab`.`employee`, CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`dno`) REFERENCES `dept` (`deptno`) ON DELETE SET NULL ON UPDATE CASCADE)
+mysql> insert into employee1 values(2,10);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`dbmslab`.`employee1`, CONSTRAINT `employee1_ibfk_1` FOREIGN KEY (`dno`) REFERENCES `dept` (`deptno`) ON DELETE CASCADE ON UPDATE CASCADE)
+mysql> select * from dept;
++--------+----------+---------+
+| deptno | deptname | deptstr |
++--------+----------+---------+
+|      2 | ECE      |      15 |
+|      3 | EEE      |      19 |
++--------+----------+---------+
+2 rows in set (0.00 sec)
+
+mysql> desc employee1
+    -> ;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| eid   | int(11) | YES  |     | NULL    |       |
+| dno   | int(11) | YES  | MUL | NULL    |       |
++-------+---------+------+-----+---------+-------+
+2 rows in set (0.09 sec)
+
+mysql> select * from employee1;
+Empty set (0.00 sec)
+
+mysql> insert into employee1 values(20,2);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into employee1 values(20,1);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`dbmslab`.`employee1`, CONSTRAINT `employee1_ibfk_1` FOREIGN KEY (`dno`) REFERENCES `dept` (`deptno`) ON DELETE CASCADE ON UPDATE CASCADE)
+mysql> insert into employee1 values(20,3);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into dept values(1,'CSE',19);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into dept values(4,'ME',NULL);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from dept;
++--------+----------+---------+
+| deptno | deptname | deptstr |
++--------+----------+---------+
+|      1 | CSE      |      19 |
+|      2 | ECE      |      15 |
+|      3 | EEE      |      19 |
+|      4 | ME       |    NULL |
++--------+----------+---------+
+4 rows in set (0.00 sec)
+
+mysql> DESC testnull;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| eid   | int(11)     | NO   |     | NULL    |       |
+| ename | varchar(20) | YES  |     | NULL    |       |
+| esal  | float(6,3)  | YES  |     | NULL    |       |
+| edob  | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> insert into testnull values(1,'ANKUR',111111.11,'1998-9-1');
+ERROR 1264 (22003): Out of range value for column 'esal' at row 1
+mysql> insert into testnull values(1,'ANKUR',11111.11,'1998-9-1');
+ERROR 1264 (22003): Out of range value for column 'esal' at row 1
+mysql> insert into testnull values(1,'ANKUR',1111.11,'1998-9-1');
+ERROR 1264 (22003): Out of range value for column 'esal' at row 1
+mysql> insert into testnull values(1,'ANKUR',1111.111,'1998-9-1');
+ERROR 1264 (22003): Out of range value for column 'esal' at row 1
+mysql> insert into testnull values(1,'ANKUR',1111,'1998-9-1');
+ERROR 1264 (22003): Out of range value for column 'esal' at row 1
+mysql> insert into testnull values(1,'ANKUR',111111.111,'1998-9-1');
+ERROR 1264 (22003): Out of range value for column 'esal' at row 1
+mysql> insert into testnull values(1,'ANKUR',11.111,'1998-9-1');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from testnull;
++-----+-------+--------+------------+
+| eid | ename | esal   | edob       |
++-----+-------+--------+------------+
+|   1 | ANKUR | 11.111 | 1998-09-01 |
++-----+-------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into testnull(ename,esal,edob) values('Ankur',1112.12,12/7/2019);
+ERROR 1364 (HY000): Field 'eid' doesn't have a default value
+mysql> select * from dept;
++--------+----------+---------+
+| deptno | deptname | deptstr |
++--------+----------+---------+
+|      1 | CSE      |      19 |
+|      2 | ECE      |      15 |
+|      3 | EEE      |      19 |
+|      4 | ME       |    NULL |
++--------+----------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee;
++------+------+
+| eid  | dno  |
++------+------+
+|    1 | NULL |
+|    2 | NULL |
++------+------+
+2 rows in set (0.00 sec)
+
+mysql> update employee set dno = 1 where eid =1 ;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++------+------+
+| eid  | dno  |
++------+------+
+|    1 |    1 |
+|    2 | NULL |
++------+------+
+2 rows in set (0.00 sec)
+
+mysql> update employee set dno = 4 where eid =2 ;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++------+------+
+| eid  | dno  |
++------+------+
+|    1 |    1 |
+|    2 |    4 |
++------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from dept;
++--------+----------+---------+
+| deptno | deptname | deptstr |
++--------+----------+---------+
+|      1 | CSE      |      19 |
+|      2 | ECE      |      15 |
+|      3 | EEE      |      19 |
+|      4 | ME       |    NULL |
++--------+----------+---------+
+4 rows in set (0.00 sec)
+
+mysql> update dept set deptno = 5 where deptno=4 ;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from dept;
++--------+----------+---------+
+| deptno | deptname | deptstr |
++--------+----------+---------+
+|      1 | CSE      |      19 |
+|      2 | ECE      |      15 |
+|      3 | EEE      |      19 |
+|      5 | ME       |    NULL |
++--------+----------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee;
++------+------+
+| eid  | dno  |
++------+------+
+|    1 |    1 |
+|    2 |    5 |
++------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee1;
++------+------+
+| eid  | dno  |
++------+------+
+|   20 |    2 |
+|   20 |    3 |
++------+------+
+2 rows in set (0.00 sec)
+
+mysql> delete from dept where deptno=3;
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from dept;
++--------+----------+---------+
+| deptno | deptname | deptstr |
++--------+----------+---------+
+|      1 | CSE      |      19 |
+|      2 | ECE      |      15 |
+|      5 | ME       |    NULL |
++--------+----------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee;
++------+------+
+| eid  | dno  |
++------+------+
+|    1 |    1 |
+|    2 |    5 |
++------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee1;
++------+------+
+| eid  | dno  |
++------+------+
+|   20 |    2 |
++------+------+
+1 row in set (0.00 sec)

@@ -1,0 +1,6 @@
+100 10011 eax 2
+104 11110 ebx 42
+107 11111 0x80
+109 10110 edx 2
+112 10011 [116] 
+ERROR: Symbol c not present in ST or LT

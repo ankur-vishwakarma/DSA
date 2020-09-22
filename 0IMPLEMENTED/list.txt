@@ -1,0 +1,5 @@
+kadanes
+merge n quick random ,binary search
+prims,kruskl ,dijktra,bellman ford
+sieve,gcd,euclid,power,factors
+nqueens,subsets
