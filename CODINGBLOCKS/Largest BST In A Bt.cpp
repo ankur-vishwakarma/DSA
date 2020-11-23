@@ -12,24 +12,6 @@ class node{
 	}
 	
 };
-node * buildtree(int * pre,int * in,int s,int e){
-	static int i=0;
-	//cout<<s<<" "<<e<<" "<<i<<endl;
-	if(s>e) return NULL;
-	node * root=new node(pre[i]);
-	int index;
-	for(int j=s;j<=e;j++) if(pre[i]==in[j]){ index=j; break;}
-	i++; //check
-	root->left=buildtree(pre,in,s,index-1);
-	root->right=buildtree(pre,in,index+1,e);
-	return root;
-}
-void preorder(node * root){
-	if(root==NULL) return;
-	cout<<root->data<<" ";
-	preorder(root->left);
-	preorder(root->right);
-}
 int m=0;
 int check_bst(node * root){
 	if(root==NULL) return 0;
@@ -51,6 +33,24 @@ int check_bst(node * root){
 		m=max(m,max(l,r));
 		return 0;
 	}
+}
+node * buildtree(int * pre,int * in,int s,int e){
+	static int i=0;
+	//cout<<s<<" "<<e<<" "<<i<<endl;
+	if(s>e) return NULL;
+	node * root=new node(pre[i]);
+	int index;
+	for(int j=s;j<=e;j++) if(pre[i]==in[j]){ index=j; break;}
+	i++; //check
+	root->left=buildtree(pre,in,s,index-1);
+	root->right=buildtree(pre,in,index+1,e);
+	return root;
+}
+void preorder(node * root){
+	if(root==NULL) return;
+	cout<<root->data<<" ";
+	preorder(root->left);
+	preorder(root->right);
 }
 main(){
 	int n;

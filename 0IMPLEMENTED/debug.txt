@@ -1,0 +1,22 @@
+// If aplying ceil,floor,pow,etc convert it into integer (might make you eat shit if you don't
+// Whenever using stacks,queues,etc always check that their top / front / back elements are not accessed when they are empty, thus causing runtime error
+// Think twice before using greedy
+// Remember losing 1 or 2 minutes is better than a penalty of 10 minutes
+// Use log2 instead of log()/log(2) to avoid shitty errors
+// If declaring a large array, define it globally
+// Always initialise anything while declaring, which will not be taken as input
+// In case of a problem having decimal calculations, try declaring everything in double rather than typecasting in each step
+// always declare the array with n+5 elements to avoid unexpected errors
+// Every problem cannot be solved by DFS easily, think of BFS too
+
+
+
+*******************my debug*******************
+//check for boundary cases
+//see if you dont keep summed or multiplied value in long long
+//didnt initialise things like sum=0
+//try to go for best solution rather than optimizing current
+//READ THE QUESTION PROPERLY check sample cases before typing
+
+
+//keep check for previously used iterators for list whether initialised again properly or not else segmentation fault

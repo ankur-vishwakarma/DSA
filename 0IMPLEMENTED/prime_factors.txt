@@ -1,9 +1,10 @@
-void primeFactors(int n)  
+vector<int> primeFactors(int n)  
 {  
+    vector<int> v;
     // Print the number of 2s that divide n  
     while (n % 2 == 0)  
     {  
-        cout << 2 << " ";  
+        v.push_back(2); 
         n = n/2;  
     }  
   
@@ -14,7 +15,7 @@ void primeFactors(int n)
         // While i divides n, print i and divide n  
         while (n % i == 0)  
         {  
-            cout << i << " ";  
+            v.push_back(i);  
             n = n/i;  
         }  
     }  
@@ -22,5 +23,7 @@ void primeFactors(int n)
     // This condition is to handle the case when n  
     // is a prime number greater than 2  
     if (n > 2)  
-        cout << n << " ";  
+        v.push_back(n);  
+
+    return v;
 }

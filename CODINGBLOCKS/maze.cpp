@@ -39,10 +39,7 @@ bool maze(int s[][10],int m,int n,int i,int j){
 			s[i][j]=0;
 		} 
 	}
-	return false;
-	
-	
-	
+	return false;	
 }
 main(){
 	int m,n;
