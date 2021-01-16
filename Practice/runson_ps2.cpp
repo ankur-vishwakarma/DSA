@@ -13,7 +13,9 @@ int solve(vector<vector<int>> board,int p,int q){
 			if(j-1>=0) dp_d[i][j]=max(dp_d[i][j],dp_d[i+1][j-1]);
 			if(j+1<m)  dp_d[i][j]=max(dp_d[i][j],dp_d[i+1][j+1]);
 			dp_d[i][j]+=board[i][j];
+			//cout<<dp_d[i][j]<<" ";
 		}
+		//cout<<endl;
 	}
 	
 	//bottomup
@@ -24,10 +26,13 @@ int solve(vector<vector<int>> board,int p,int q){
 			if(j-1>=0) dp_u[i][j]=max(dp_u[i][j],dp_u[i-1][j-1]);
 			if(j+1<m)  dp_u[i][j]=max(dp_u[i][j],dp_u[i-1][j+1]);
 			dp_u[i][j]+=board[i][j];
+			//cout<<dp_u[i][j]<<" ";
 		}
+		//cout<<endl;
 	}
 	
 	return max(dp_d[0][p],dp_u[n-1][q]);
+	//for(int i=0;i<n;)
 }
 main(){
 	int n,m;
