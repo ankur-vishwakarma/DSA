@@ -25,7 +25,7 @@ main(){
 		ll given=0,total=0;
 		for(int i=0;i<n;i++){
 			ll i_need=t[s[i].first];
-			if(given<m&&given<=s[i].second&&t[given]<i_need) total+=t[given],given++;
+			if(given<m&&given<=s[i].second&&t[given]<=i_need) total+=t[given],given++;
 			else total+=i_need;
 			//cout<<total<<" "<<given<<endl;
 		}

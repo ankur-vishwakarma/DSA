@@ -1,0 +1,110 @@
+#include<bits/stdc++.h>
+using namespace std;
+main(){
+    int t,cs=1;
+    cin>>t;
+    while(t--){
+        int r,c;
+        cin>>r>>c;
+        priority_queue<pair<int,pair<int,int> > > p;
+        int ** s=new int * [r];
+        for(int i=0;i<r;i++) s[i]=new int[c];
+        for(int i=0;i<r;i++) for(int j=0;j<c;j++) cin>>s[i][j],p.push({s[i][j], {i,j}});
+        int count=0;
+        while(!p.empty()){
+        	pair<int,pair<int,int> > pp = p.front();
+        	int i=pp.second.first, j=pp.second.second, k=pp.first;
+        	if(s[i][j]>k) continue;
+        	//update people and also insert in queue
+                //up
+                   int it=i-1;
+                   while(it>=0&&s[it][j]<s[it+1][j]){
+                       count+=(s[it+1][j]-s[it][j]-1);
+                       s[it][j]=s[it+1][j]-1;
+                       p.push({s[it][j],{it,j}});
+                       it--;
+                   }
+                   //cout<<count<<endl;
+                   //left
+                   it=j-1;
+                   while(it>=0&&s[i][it]<s[i][it+1]){
+                       count+=(s[i][it+1]-s[i][it]-1);
+                       s[i][it]=s[i][it+1]-1;
+                       p.push({s[i][it],{i,it}});
+                       it--;
+                   }
+                   //cout<<count<<endl;
+                   //right
+                   it=j+1;
+                   while(it<c&&s[i][it]<s[i][it-1]){
+                       count+=(s[i][it-1]-s[i][it]-1);
+                       s[i][it]=s[i][it-1]-1;
+                       p.push({s[i][it],{i,it}});
+                       it++;
+                   }
+                   //cout<<count<<endl;
+                   //down
+                   it=i+1;
+                   while(it<r&&s[it][j]<s[it-1][j]){
+                       count+=(s[it-1][j]-s[it][j]-1);
+                       s[it][j]=s[it-1][j]-1;
+                       p.push({s[it][j],{it,j}});
+                       it++;
+                   }
+        }
+        
+        
+        
+        /*for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+               if(s[i][j]>1){
+                   //cout<<i<<" "<<j<<endl;
+                   //up
+                   int it=i-1;
+                   while(it>=0&&s[it][j]<s[it+1][j]){
+                       count+=(s[it+1][j]-s[it][j]-1);
+                       s[it][j]=s[it+1][j]-1;
+                       it--;
+                   }
+                   //cout<<count<<endl;
+                   //left
+                   it=j-1;
+                   while(it>=0&&s[i][it]<s[i][it+1]){
+                       count+=(s[i][it+1]-s[i][it]-1);
+                       s[i][it]=s[i][it+1]-1;
+                       it--;
+                   }
+                   //cout<<count<<endl;
+                   //right
+                   it=j+1;
+                   while(it<c&&s[i][it]<s[i][it-1]){
+                       count+=(s[i][it-1]-s[i][it]-1);
+                       s[i][it]=s[i][it-1]-1;
+                       it++;
+                   }
+                   //cout<<count<<endl;
+                   //down
+                   it=i+1;
+                   while(it<r&&s[it][j]<s[it-1][j]){
+                       count+=(s[it-1][j]-s[it][j]-1);
+                       s[it][j]=s[it-1][j]-1;
+                       it++;
+                   }
+                   //cout<<count<<endl;
+               }
+               for(int l=0;l<r;l++){
+                   for(int m=0;m<c;m++){
+                       cout<<s[l][m]<<" ";
+                   }
+                   cout<<endl;
+               }
+            }
+        }*/
+        cout<<"Case #"<<cs<<": "<<count<<endl;
+        for(int i=0;i<r;i++) delete [] s[i];
+        delete [] s;
+        cs++;
+    }
+}
+
+if(((l>0&&abs(s[l-1][m]-s[l][m]<=1))||l<=0)&&((l<r-1&&abs(s[l+1][m]-s[l][m]<=1))||l>=r-1)&&((m>0&&abs(s[l][m-1]-s[l][m]<=1))||m<=0)&&((m<c-1&&abs(s[l][m+1]-s[l][m]<=1))||m>=c-1)) flag=1;
