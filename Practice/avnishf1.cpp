@@ -17,9 +17,9 @@ int numWays(int input1){
   vector<int> dp(N + 1, 0);
   dp[0] = 1;
 
-  for (int c : coins) {
-    for (int i = c; i <= N; ++i)
-      dp[i] += dp[i - c];
+  for (int c =0;c<4;c++) {
+    for (int i = coins[c]; i <= N; ++i)
+      dp[i] += dp[i - coins[c]];
   }
   return dp[N];
 }
