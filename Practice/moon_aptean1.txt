@@ -1,0 +1,43 @@
+#define ll long long
+#define md 1000000007
+
+ll power(ll x,ll y) 
+{ 
+	
+    if (y == 0) return 1; 
+    
+    ll pw=power(x, y / 2) %md;
+    
+    if (y % 2 == 0) 
+        return (pw * pw) % md; 
+    else
+        return  (x * pw * pw) % md; 
+} 
+
+
+cout<<power(2,n-2) % md<<endl;
+
+ll solve(int n){
+	int r=n%4;
+	ll k= n/2 +1;
+	ll tmp = k * k;
+	if(r==0) return tmp-1;
+	else return tmp;
+	
+}
+
+int main(){
+	int q;
+	cin>>q;
+	while(q--){
+	ll l,r;
+	cin>>l>>r;
+	cout<<solve(r)-solve(l-1)<<endl;
+	}
+}
+
+
+
+
+
+
